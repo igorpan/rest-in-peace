@@ -1,0 +1,23 @@
+{
+  "name": "rest-in-peace",
+  "version": "0.0.1",
+  "description": "Rest Resource Consumption library",
+  "main": "resource.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igorpan/rest-in-peace.git"
+  },
+  "keywords": [
+    "rest",
+    "client"
+  ],
+  "author": "Igor Pantovic <igor@pantovic.com> (http://igor.pantovic.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/igorpan/rest-in-peace/issues"
+  },
+  "homepage": "https://github.com/igorpan/rest-in-peace#readme"
+}
