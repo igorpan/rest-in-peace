@@ -1,6 +1,6 @@
 var reqwest = require('reqwest');
 var EventRegistry = require('./event-registry.js');
-var querystring = require('querystring');
+var querystring = require('qs');
 var Q = require('q');
 
 var Client = function () {
@@ -37,22 +37,19 @@ Client.prototype.request = function (method, url, data, headers) {
         headers: headers
     };
 
-    this._eventRegistry.trigger('pre_request', requestData);
-
-    // Initiate request and return a promise
-
-    var deferred = Q.defer();
-
-    reqwest(requestData)
-        .then(function (result) {
-            this._eventRegistry.trigger('post_request');
-            deferred.resolve(result);
+    return this._eventRegistry.trigger('pre_request', [requestData])
+        .then(function () {
+            return reqwest(requestData);
+        })
+        .then(function (data) {
+            return this._eventRegistry.trigger('post_request', [data]).then(function () {
+                return data;
+            });
         }.bind(this))
-        .catch(function (response) {
-            deferred.reject(response);
-        });
-
-    return deferred.promise;
+        .then(function (data) {
+            return data;
+        })
+    ;
 
 };
 

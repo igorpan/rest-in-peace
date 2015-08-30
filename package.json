@@ -1,6 +1,6 @@
 {
   "name": "rest-in-peace",
-  "version": "0.0.1",
+  "version": "0.0.22",
   "description": "Rest Resource Consumption library",
   "main": "resource.js",
   "scripts": {
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/igorpan/rest-in-peace/issues"
   },
-  "homepage": "https://github.com/igorpan/rest-in-peace#readme"
+  "homepage": "https://github.com/igorpan/rest-in-peace#readme",
+  "dependencies": {
+    "lodash": "^3.10.1",
+    "qs": "^5.0.0"
+  }
 }

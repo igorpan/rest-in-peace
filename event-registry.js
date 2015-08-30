@@ -1,3 +1,5 @@
+var Q = require('q');
+
 function EventRegistry(events) {
 
     this.listeners = {};
@@ -33,17 +35,28 @@ EventRegistry.prototype.import = function (callbacks) {
 };
 
 
-EventRegistry.prototype.trigger = function (event) {
+EventRegistry.prototype.trigger = function (event, args) {
 
+    // Ensure that event exists
     this._assertEvent(event);
-    var args = [];
-    for (var i = 1; i < arguments.length; i++) {
-        args.push(arguments[i]);
-    }
+
+    var promises = [];
+    // Go through every listener for this event
     this.listeners[event].forEach(function (callback) {
-        callback.apply(this, args);
+        // Call listener, passing the arguments given
+        var promise = callback.apply(this, args);
+        // If listener is asynchronous, it should return a promise,
+        // add that promise to promises array
+        if (promise && promise.then) {
+            promises.push(promise);
+        }
     });
 
+    if (promises.length > 0) {
+        return Q.all(promises);
+    } else {
+        return Q(args[0]);
+    }
 };
 
 
