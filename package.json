@@ -1,6 +1,6 @@
 {
   "name": "rest-in-peace",
-  "version": "0.0.22",
+  "version": "0.0.3",
   "description": "Rest Resource Consumption library",
   "main": "resource.js",
   "scripts": {
